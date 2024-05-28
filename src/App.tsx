@@ -1,11 +1,13 @@
-import './App.css'
+import "./App.css";
+import AppRoutes from "./components/AppRoutes";
+import LoginContextProvider from "./components/context/LoginContext";
 
 function App() {
   return (
-    <>
-    <span>Hi</span>
-    </>
-  )
+    <LoginContextProvider>
+      <AppRoutes />
+    </LoginContextProvider>
+  );
 }
 
-export default App
+export default App;

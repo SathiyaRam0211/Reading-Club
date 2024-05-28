@@ -1,0 +1,54 @@
+{
+  "members": [
+    {
+      "id": "1",
+      "username": "sample1@gmail.com",
+      "books": [
+        "1000 Splendid Suns",
+        "Breaking the Habit of being yourself"
+      ],
+      "gender": "male",
+      "dateOfJoining": "28-05-2024"
+    },
+    {
+      "id": "2",
+      "username": "sample2@gmail.com",
+      "books": [
+        "How Soon is Now?",
+        "Kite Runner"
+      ],
+      "gender": "female",
+      "dateOfJoining": "28-05-2023"
+    },
+    {
+      "id": "3",
+      "username": "sample3@gmail.com",
+      "books": [
+        "Half Girlfriend",
+        "One Night at Call Center"
+      ],
+      "gender": "female",
+      "dateOfJoining": "28-05-2022"
+    },
+    {
+      "id": "4",
+      "username": "sample1@gmail.com",
+      "books": [
+        "1000 Splendid Suns",
+        "Breaking the Habit of being yourself"
+      ],
+      "gender": "male",
+      "dateOfJoining": "28-05-2024"
+    },
+    {
+      "id": "5",
+      "username": "sample2@gmail.com",
+      "books": [
+        "How Soon is Now?",
+        "Kite Runner"
+      ],
+      "gender": "female",
+      "dateOfJoining": "28-05-2023"
+    }
+  ]
+}
