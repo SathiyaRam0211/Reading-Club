@@ -1,6 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { apiRequest, formatDate } from "../../utils/util-functions";
-import { CardDrawer, PageSection, TopBar } from "../../utils/util-styles";
+import {
+  CardDrawer,
+  Count,
+  FlexBox,
+  Font,
+  PageSection,
+  TopBar,
+} from "../../utils/util-styles";
 import Toolbar from "../common/Toolbar";
 import { Color, Member, Order } from "../../utils/util-interfaces";
 import MemberCard from "../MemberCard";
@@ -68,18 +75,25 @@ const Home = () => {
               buttonText={CONSTANTS.BUTTON.ADMIN}
             />
           )}
+          <FlexBox>
+            <Font $weight="600">{CONSTANTS.LABEL.TOTAL_USERS}</Font>
+            <Count>
+              <Font $weight="600">{members.length}</Font>
+            </Count>
+          </FlexBox>
           <CustomButton
             handleClick={() => handleSort(ascOrder ? "asc" : "desc")}
             buttonText={CONSTANTS.BUTTON.DATE}
             ascOrder={ascOrder}
           />
         </TopBar>
-        <CardDrawer>
-          {members.length > 0 &&
-            members.map((member, index) => (
+        {members.length > 0 && (
+          <CardDrawer>
+            {members.map((member, index) => (
               <MemberCard key={index} {...member} />
             ))}
-        </CardDrawer>
+          </CardDrawer>
+        )}
         {!members.length && <EmptyBanner />}
         <Toaster
           openToaster={openToaster}
