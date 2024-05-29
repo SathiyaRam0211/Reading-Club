@@ -47,7 +47,7 @@ export const EllipsisStyle = {
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  maxWidth: "200px",
+  maxWidth: "180px",
 };
 
 export const FlexBox = styled.div<FlexItemProps>`
