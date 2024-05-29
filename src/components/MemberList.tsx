@@ -62,7 +62,7 @@ const MemberList = ({
     <>
       {list && list.length > 0 && (
         <MemberListDrawer>
-          <TableContainer sx={{ maxHeight: 480 }}>
+          <TableContainer sx={{ maxHeight: "calc(100vh - 212px)" }}>
             <Table
               sx={{ minWidth: 650 }}
               stickyHeader

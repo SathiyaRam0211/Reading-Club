@@ -123,7 +123,7 @@ export const Count = styled.div`
 export const CardDrawer = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
-  height: 500px;
+  height: calc(100vh - 148px);
   overflow-y: scroll;
 `;
 
