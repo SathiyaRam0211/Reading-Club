@@ -6,6 +6,7 @@ import {
   CardBadge,
   Font,
   MemberImgStyle,
+  EllipsisStyle,
 } from "../utils/util-styles";
 import Male from "../assets/male-vector.jpg";
 import Female from "../assets/female-vector.jpg";
@@ -28,7 +29,7 @@ const MemberCard = ({ id, username, dateOfJoining, gender, books }: Member) => {
       />
       <CardRow>
         <Font $weight="600">{CONSTANTS.LABEL.USERNAME}</Font>
-        <Font>{username}</Font>
+        <Font style={EllipsisStyle}>{username}</Font>
       </CardRow>
       <CardRow>
         <Font $weight="600">{CONSTANTS.LABEL.DATE}</Font>
