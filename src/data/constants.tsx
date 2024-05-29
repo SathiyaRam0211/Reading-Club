@@ -1,1 +1,33 @@
-export const URL = "http://localhost:3000/members";
+export const CONSTANTS = {
+  URL: "http://localhost:3000/members",
+  MESSAGE: {
+    VALID_EMAIL: "Please, make sure username is a valid email",
+    ADDED_MEMBER: "Member Added Successfully!",
+    FILL_FIELDS: "Please fill in the mandatory fields!",
+    NO_MEMBERS: "No members found!",
+    LOGIN: "Logged in successfully!",
+    LOGOUT: "Logged out successfully!",
+  },
+  LABEL: {
+    NO_MEMBERS: "No Members Yet!",
+    DELETE_USER: "Are you surely want to delete the member?",
+    BRAND: "Reading Club",
+    TOTAL_USERS: "Total Users",
+    S_NO: "S. No.",
+    USERNAME: "Username",
+    BOOKS: "Books",
+    GENDER: "Gender",
+    DATE: "Date Joined",
+    ACTION: "Action",
+  },
+  BUTTON: {
+    DELETE: "Yes, Delete",
+    NO: "No",
+    LOGIN: "Login",
+    LOGOUT: "Logout ",
+    HOME: "Home",
+    NEW_MEMBER: "New Member",
+    ADMIN: "Admin",
+    DATE: "Date",
+  },
+};

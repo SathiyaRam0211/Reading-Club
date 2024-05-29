@@ -1,54 +1,34 @@
 {
   "members": [
     {
-      "id": "1",
-      "username": "sample1@gmail.com",
+      "id": "c0f24088-f27a-4038-8a37-d08c36fd7924",
+      "username": "sathiyaram.0211@gmail.com",
+      "gender": "male",
+      "dateOfJoining": "29-05-2024",
       "books": [
         "1000 Splendid Suns",
-        "Breaking the Habit of being yourself"
-      ],
-      "gender": "male",
-      "dateOfJoining": "28-05-2024"
-    },
-    {
-      "id": "2",
-      "username": "sample2@gmail.com",
-      "books": [
-        "How Soon is Now?",
         "Kite Runner"
-      ],
-      "gender": "female",
-      "dateOfJoining": "28-05-2023"
+      ]
     },
     {
-      "id": "3",
-      "username": "sample3@gmail.com",
-      "books": [
-        "Half Girlfriend",
-        "One Night at Call Center"
-      ],
+      "id": "3b775def-8095-442e-afb5-cd9275f1df57",
+      "username": "eesha@gmail.com",
       "gender": "female",
-      "dateOfJoining": "28-05-2022"
+      "dateOfJoining": "29-05-2024",
+      "books": [
+        "Book1",
+        "Book2"
+      ]
     },
     {
-      "id": "4",
-      "username": "sample1@gmail.com",
-      "books": [
-        "1000 Splendid Suns",
-        "Breaking the Habit of being yourself"
-      ],
+      "id": "657b6550-9e47-4783-b408-bf200b952a1c",
+      "username": "aravindh@gmail.com",
       "gender": "male",
-      "dateOfJoining": "28-05-2024"
-    },
-    {
-      "id": "5",
-      "username": "sample2@gmail.com",
+      "dateOfJoining": "29-05-2024",
       "books": [
-        "How Soon is Now?",
-        "Kite Runner"
-      ],
-      "gender": "female",
-      "dateOfJoining": "28-05-2023"
+        "How soon is now?",
+        "Half Girlfriend"
+      ]
     }
   ]
 }

@@ -1,17 +1,5 @@
-import React, {
-  createContext,
-  useState,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
-} from "react";
-
-type SessionType = string | undefined;
-
-interface LoginContextType {
-  session: SessionType;
-  setSession: Dispatch<SetStateAction<SessionType>>;
-}
+import { ReactNode, createContext, useEffect, useState } from "react";
+import { LoginContextType } from "../../utils/util-interfaces";
 
 export const LoginContext = createContext<LoginContextType>({
   session: "",
@@ -19,14 +7,12 @@ export const LoginContext = createContext<LoginContextType>({
 });
 LoginContext.displayName = "LoginContext";
 
-interface LoginContextProviderProps {
-  children: ReactNode;
-}
-
-const LoginContextProvider: React.FC<LoginContextProviderProps> = ({
-  children,
-}) => {
-  const [session, setSession] = useState<SessionType>("");
+const LoginContextProvider = ({ children }: { children: ReactNode }) => {
+  const [session, setSession] = useState<string>("");
+  useEffect(() => {
+    if (session !== "") sessionStorage.setItem("key", session);
+    else sessionStorage.removeItem("key");
+  }, [session]);
   return (
     <LoginContext.Provider value={{ session, setSession }}>
       {children}

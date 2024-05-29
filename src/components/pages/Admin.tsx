@@ -1,32 +1,42 @@
 import {
-  Button,
+  Count,
   FlexBox,
   Font,
-  FontAwesomeIconStyle,
   PageSection,
   TopBar,
 } from "../../utils/util-styles";
-import Toolbar from "../Toolbar";
+import Toolbar from "../common/Toolbar";
 import { useNavigate } from "react-router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faPlus } from "@fortawesome/free-solid-svg-icons";
 import MemberList from "../MemberList";
 import { useEffect, useState } from "react";
-import { Member } from "../../utils/util-interfaces";
+import { Color, Member } from "../../utils/util-interfaces";
 import { apiRequest } from "../../utils/util-functions";
-import { URL } from "../../data/constants";
+import { CONSTANTS } from "../../data/constants";
 import AddUser from "../AddUser";
+import Toaster from "../common/Toaster";
+import CustomButton from "../common/CustomButton";
 
 const Admin = () => {
   const navigate = useNavigate();
   const [members, setMembers] = useState<Array<Member>>([]);
   const [addUser, setAddUser] = useState<boolean>(false);
+  const [openToaster, setOpenToaster] = useState<boolean>(false);
+  const [color, setColor] = useState<Color>("success");
+  const [toasterMessage, setToasterMessage] = useState<string>("");
 
   const getMembers = (): void => {
-    apiRequest(URL, "GET").then((res) => {
-      if (res.error === null) setMembers(res.data);
-      else {
-        console.log(res.error);
+    apiRequest(CONSTANTS.URL, "GET").then((res) => {
+      if (res.error === null) {
+        if (!res.data.length) {
+          setToasterMessage(CONSTANTS.MESSAGE.NO_MEMBERS);
+          setColor("error");
+          setOpenToaster(true);
+        }
+        setMembers(res.data);
+      } else {
+        setToasterMessage(res.error);
+        setColor("error");
+        setOpenToaster(true);
       }
     });
   };
@@ -37,40 +47,51 @@ const Admin = () => {
 
   return (
     <>
-      <Toolbar />
+      <Toolbar
+        setOpenToaster={setOpenToaster}
+        setColor={setColor}
+        setToasterMessage={setToasterMessage}
+      />
       <PageSection>
         <TopBar>
-          <Button onClick={() => navigate("/")}>
-            <FlexBox>
-              <FontAwesomeIcon
-                icon={faArrowLeft}
-                style={FontAwesomeIconStyle}
-              />
-              <Font weight="600" size="14px">
-                Home
-              </Font>
-            </FlexBox>
-          </Button>
-          <Button onClick={() => setAddUser(true)}>
-            <FlexBox>
-              <Font weight="600" size="14px">
-                New Member
-              </Font>
-              <FontAwesomeIcon icon={faPlus} style={FontAwesomeIconStyle} />
-            </FlexBox>
-          </Button>
-          {/* <FlexBox>
-            <Font weight="600">Total Users</Font>
+          <CustomButton
+            buttonText={CONSTANTS.BUTTON.HOME}
+            handleClick={() => navigate("/")}
+          />
+          <FlexBox>
+            <Font $weight="600">{CONSTANTS.LABEL.TOTAL_USERS}</Font>
             <Count>
-              <Font weight="600">{members.length}</Font>
+              <Font $weight="600">{members.length}</Font>
             </Count>
-          </FlexBox> */}
+          </FlexBox>
+          <CustomButton
+            buttonText={CONSTANTS.BUTTON.NEW_MEMBER}
+            handleClick={() => setAddUser(true)}
+          />
         </TopBar>
         {addUser ? (
-          <AddUser setAddUser={setAddUser} />
+          <AddUser
+            setAddUser={setAddUser}
+            getMembers={getMembers}
+            setOpenToaster={setOpenToaster}
+            setColor={setColor}
+            setToasterMessage={setToasterMessage}
+          />
         ) : (
-          <MemberList list={members} getMembers={getMembers} />
+          <MemberList
+            list={members}
+            getMembers={getMembers}
+            setOpenToaster={setOpenToaster}
+            setColor={setColor}
+            setToasterMessage={setToasterMessage}
+          />
         )}
+        <Toaster
+          openToaster={openToaster}
+          setOpenToaster={setOpenToaster}
+          color={color}
+          toasterMessage={toasterMessage}
+        />
       </PageSection>
     </>
   );

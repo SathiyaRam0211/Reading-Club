@@ -43,10 +43,17 @@ export const formatDate = (dateStr: string): Date => {
   return new Date(year, month - 1, day);
 };
 
-export const uuidv4 = () => {
+//generates uuidv4
+export const uuidv4 = (): string => {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
     var r = (Math.random() * 16) | 0,
       v = c === "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
+};
+
+//validates email format and returns boolean
+export const validateEmail = (email: string): boolean => {
+  const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6}$/;
+  return pattern.test(email);
 };

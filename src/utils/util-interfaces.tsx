@@ -1,4 +1,15 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type Gender = "male" | "female";
+
+export type Color = "success" | "error" | "warning";
+
+export type Order = "asc" | "desc";
+
+export interface LoginContextType {
+  session: string;
+  setSession: Dispatch<SetStateAction<string>>;
+}
 
 export interface Member {
   id: string;
@@ -9,18 +20,18 @@ export interface Member {
 }
 
 export interface NavItemProps {
-  align?: string;
-  pointer?: boolean;
+  $align?: string;
+  $pointer?: string;
 }
 
 export interface FlexItemProps {
-  alignItems?: string;
-  justifyContent?: string;
-  flexDirection?: string;
+  $alignItems?: string;
+  $justifyContent?: string;
+  $flexDirection?: string;
 }
 
 export interface FontProps {
-  size?: string;
-  weight?: string;
-  light?: boolean;
+  $size?: string;
+  $weight?: string;
+  $light?: string;
 }

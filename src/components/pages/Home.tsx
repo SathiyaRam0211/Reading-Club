@@ -1,34 +1,24 @@
 import { useContext, useEffect, useState } from "react";
 import { apiRequest, formatDate } from "../../utils/util-functions";
-import {
-  Button,
-  CardDrawer,
-  FlexBox,
-  Font,
-  FontAwesomeIconStyle,
-  PageSection,
-  TopBar,
-} from "../../utils/util-styles";
-import Toolbar from "../Toolbar";
-import { Member } from "../../utils/util-interfaces";
+import { CardDrawer, PageSection, TopBar } from "../../utils/util-styles";
+import Toolbar from "../common/Toolbar";
+import { Color, Member, Order } from "../../utils/util-interfaces";
 import MemberCard from "../MemberCard";
 import { LoginContext } from "../context/LoginContext";
 import { useNavigate } from "react-router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowDown,
-  faArrowRight,
-  faArrowUp,
-} from "@fortawesome/free-solid-svg-icons";
-import { URL } from "../../data/constants";
-
-type Order = "asc" | "desc";
+import { CONSTANTS } from "../../data/constants";
+import Toaster from "../common/Toaster";
+import EmptyBanner from "../common/EmptyBanner";
+import CustomButton from "../common/CustomButton";
 
 const Home = () => {
   const navigate = useNavigate();
   const [members, setMembers] = useState<Array<Member>>([]);
   const [ascOrder, setAscOrder] = useState<boolean>(true);
   const { session } = useContext(LoginContext);
+  const [openToaster, setOpenToaster] = useState<boolean>(false);
+  const [color, setColor] = useState<Color>("success");
+  const [toasterMessage, setToasterMessage] = useState<string>("");
 
   const handleSort = (order: Order) => {
     setAscOrder((current) => !current);
@@ -43,10 +33,18 @@ const Home = () => {
   };
 
   const getMembers = (): void => {
-    apiRequest(URL, "GET").then((res) => {
-      if (res.error === null) setMembers(res.data);
-      else {
-        console.log(res.error);
+    apiRequest(CONSTANTS.URL, "GET").then((res) => {
+      if (res.error === null) {
+        if (!res.data.length) {
+          setToasterMessage(CONSTANTS.MESSAGE.NO_MEMBERS);
+          setColor("error");
+          setOpenToaster(true);
+        }
+        setMembers(res.data);
+      } else {
+        setToasterMessage(res.error);
+        setColor("error");
+        setOpenToaster(true);
       }
     });
   };
@@ -57,48 +55,38 @@ const Home = () => {
 
   return (
     <>
-      <Toolbar />
+      <Toolbar
+        setOpenToaster={setOpenToaster}
+        setColor={setColor}
+        setToasterMessage={setToasterMessage}
+      />
       <PageSection>
         <TopBar>
           {session !== "" && (
-            <Button onClick={() => navigate("/admin")}>
-              <FlexBox>
-                <Font weight="600" size="14px">
-                  Admin
-                </Font>
-                <FontAwesomeIcon
-                  icon={faArrowRight}
-                  style={FontAwesomeIconStyle}
-                />
-              </FlexBox>
-            </Button>
+            <CustomButton
+              handleClick={() => navigate("/admin")}
+              buttonText={CONSTANTS.BUTTON.ADMIN}
+            />
           )}
-          <Button onClick={() => handleSort(ascOrder ? "asc" : "desc")}>
-            <FlexBox>
-              <Font weight="600" size="14px">
-                Date
-              </Font>
-              {ascOrder ? (
-                <FontAwesomeIcon
-                  icon={faArrowUp}
-                  style={FontAwesomeIconStyle}
-                />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faArrowDown}
-                  style={FontAwesomeIconStyle}
-                />
-              )}
-            </FlexBox>
-          </Button>
+          <CustomButton
+            handleClick={() => handleSort(ascOrder ? "asc" : "desc")}
+            buttonText={CONSTANTS.BUTTON.DATE}
+            ascOrder={ascOrder}
+          />
         </TopBar>
         <CardDrawer>
-          {members &&
-            members.length > 0 &&
+          {members.length > 0 &&
             members.map((member, index) => (
               <MemberCard key={index} {...member} />
             ))}
         </CardDrawer>
+        {!members.length && <EmptyBanner />}
+        <Toaster
+          openToaster={openToaster}
+          setOpenToaster={setOpenToaster}
+          color={color}
+          toasterMessage={toasterMessage}
+        />
       </PageSection>
     </>
   );

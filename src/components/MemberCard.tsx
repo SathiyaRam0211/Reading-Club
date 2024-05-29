@@ -10,6 +10,7 @@ import {
 import Male from "../assets/male-vector.jpg";
 import Female from "../assets/female-vector.jpg";
 import { useState } from "react";
+import { CONSTANTS } from "../data/constants";
 
 const MemberCard = ({ id, username, dateOfJoining, gender, books }: Member) => {
   const [showInfo, setShowInfo] = useState<boolean>(false);
@@ -20,13 +21,17 @@ const MemberCard = ({ id, username, dateOfJoining, gender, books }: Member) => {
       onMouseEnter={() => setShowInfo(true)}
       onMouseLeave={() => setShowInfo(false)}
     >
-      <img src={gender === "male" ? Male : Female} style={MemberImgStyle} />
+      <img
+        src={gender === "male" ? Male : Female}
+        style={MemberImgStyle}
+        alt="gender-place-holder"
+      />
       <CardRow>
-        <Font weight="600">Username</Font>
+        <Font $weight="600">{CONSTANTS.LABEL.USERNAME}</Font>
         <Font>{username}</Font>
       </CardRow>
       <CardRow>
-        <Font weight="600">Date Joined</Font>
+        <Font $weight="600">{CONSTANTS.LABEL.DATE}</Font>
         <Font>{dateOfJoining}</Font>
       </CardRow>
       {showInfo && (

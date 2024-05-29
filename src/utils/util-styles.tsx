@@ -8,12 +8,20 @@ const dark = "#212121";
 
 export const LogoImgStyle = {
   height: "48px",
+  marginRight: "8px",
 };
 
 export const MemberImgStyle = {
   height: "200px",
   marginBottom: "16px",
   borderRadius: "8px",
+};
+
+export const BannerImgStyle = {
+  width: "520px",
+  marginTop: "16px",
+  borderRadius: "8px",
+  display: "block",
 };
 
 export const FontAwesomeIconStyle = {
@@ -35,19 +43,26 @@ export const CustomInputStyle = {
   width: "300px",
 };
 
+export const EllipsisStyle = {
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  maxWidth: "200px",
+};
+
 export const FlexBox = styled.div<FlexItemProps>`
   display: flex;
-  align-items: ${(props) => (props.alignItems ? props.alignItems : "center")};
+  align-items: ${(props) => (props.$alignItems ? props.$alignItems : "center")};
   justify-content: ${(props) =>
-    props.justifyContent ? props.justifyContent : "flex-start"};
+    props.$justifyContent ? props.$justifyContent : "flex-start"};
   flex-direction: ${(props) =>
-    props.flexDirection ? props.flexDirection : "row"};
+    props.$flexDirection ? props.$flexDirection : "row"};
 `;
 
 export const Font = styled.span<FontProps>`
-  font-size: ${(props) => (props.size ? props.size : "16px")};
-  color: ${(props) => (props.light ? light : dark)};
-  font-weight: ${(props) => (props.weight ? props.weight : 400)};
+  font-size: ${(props) => (props.$size ? props.$size : "16px")};
+  color: ${(props) => (props.$light === "true" ? light : dark)};
+  font-weight: ${(props) => (props.$weight ? props.$weight : 400)};
 `;
 
 export const PageSection = styled.section`
@@ -71,9 +86,9 @@ export const TopBar = styled.div`
 `;
 
 export const NavItem = styled.div<NavItemProps>`
-  text-align: ${(props) => (props.align ? props.align : "center")};
+  text-align: ${(props) => (props.$align ? props.$align : "center")};
   width: 200px;
-  cursor: ${(props) => (props.pointer ? "pointer" : "auto")};
+  cursor: ${(props) => (props.$pointer === "true" ? "pointer" : "auto")};
   &:nth-child(2) {
     margin: 0 auto;
   }
@@ -154,6 +169,8 @@ export const MemberListDrawer = styled.div`
   background: ${light};
   margin: 32px 0;
   border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
 `;
 
 const popUpAnimation = keyframes`
@@ -197,4 +214,11 @@ export const AddUserCard = styled.div`
   border-radius: 12px;
   border: 1px solid ${secondary};
   margin: 16px 32px;
+`;
+
+export const Banner = styled.div`
+  padding: 16px;
+  border-radius: 12px;
+  background: ${light};
+  text-align: center;
 `;
